@@ -1,0 +1,34 @@
+#include <IRremote.h>
+
+const int RECV_PIN = 2;  // IR Receiver on pin 2
+
+IRrecv irrecv(RECV_PIN);
+decode_results results;
+
+void setup() {
+  Serial.begin(9600);
+  irrecv.enableIRIn();  // Start the receiver
+  Serial.println("IR receiver ready. Point a remote and press a button.");
+}
+
+void loop() {
+  if (irrecv.decode(&results)) {
+    Serial.println("IR signal received:");
+
+    // Print raw value in HEX (common for ON/OFF, VOLUME, etc.)
+    Serial.print("Code: 0x");
+    Serial.println(results.value, HEX);
+
+    // Print raw timing for unknown formats
+    if (results.decode_type == UNKNOWN) {
+      Serial.println("Raw data:");
+      for (int i = 0; i < results.rawlen; i++) {
+        Serial.print(results.rawbuf[i] * USECPERTICK);
+        Serial.print(" ");
+      }
+      Serial.println();
+    }
+
+    irrecv.resume();  // Receive the next value
+  }
+}
