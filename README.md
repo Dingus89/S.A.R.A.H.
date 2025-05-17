@@ -4,7 +4,7 @@ Home automation
 Full Install Instructions (Ubuntu 22.04+)
 
 1. Clone SARAH Repo
-git clone https://github.com/your-username/sarah.git
+git clone https://github.com/Dingus89/sarah.git
 cd sarah
 
 2. Install System Dependencies
