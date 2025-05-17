@@ -1,0 +1,14 @@
+[Unit]
+Description=SARAH AI Voice Assistant
+After=network.target sound.target
+
+[Service]
+Type=simple
+User=your-username
+WorkingDirectory=/home/your-username/sarah
+ExecStart=/usr/bin/python3 -m app.main
+Restart=always
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
